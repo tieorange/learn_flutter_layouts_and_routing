@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_layouts2/main.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -9,13 +10,20 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
-
 class _MyHomePageState extends State<MyHomePage> {
-  buildList(BuildContext context) {
+  buildList() {
     var src = "http://coape.pl/files/image/petsitter_photo2017_2.jpg";
-
-    return buildItem(src);
+    return ListView.builder(
+        itemCount: 15,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            child: buildItem(src),
+            onTap: () {
+              onClickItem(index);
+            },
+          );
+        }).build(context);
   }
 
   Container buildItem(String src) {
@@ -68,8 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(title: Text("Pets")),
       backgroundColor: Colors.blueGrey,
       body: Container(
-        child: buildList(context),
+        child: buildList(),
       ),
     );
+  }
+
+  onClickItem(int index) {
+    Application.router.navigateTo(context, "post/someId");
+
+//    Navigator.of(context)
+//        .push(MaterialPageRoute(builder: (context) => PostDetailsPage()));
   }
 }

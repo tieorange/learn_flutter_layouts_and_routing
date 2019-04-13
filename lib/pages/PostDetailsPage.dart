@@ -5,7 +5,7 @@ import 'package:learn_flutter_layouts2/main.dart';
 class PostDetailsPage extends StatefulWidget {
   final Post post;
 
-  PostDetailsPage({Key key, this.post}) : super(key: key);
+  PostDetailsPage({Key key, @required this.post}) : super(key: key);
 
   @override
   _PostDetailsPageState createState() => _PostDetailsPageState();
@@ -32,7 +32,7 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
   }
 
   void onBackPressed() {
-    Navigator.of(context).pop();
+    Application.router.pop(context);
   }
 
   String getPicture() => widget.post.pictures.first;

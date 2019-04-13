@@ -1,22 +1,22 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_flutter_layouts2/Post.dart';
+import 'package:learn_flutter_layouts2/Routes.dart';
 import 'package:learn_flutter_layouts2/pages/HomePage.dart';
-import 'package:learn_flutter_layouts2/pages/PostDetailsPage.dart';
 
+//region Application
 class Application {
   static Router router;
 }
-
-var postDetailsHandler =
-    Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  Post post = params["post"];
-  return new PostDetailsPage(post: post);
-});
+//endregion
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  MyApp() {
+    Application.router = new Router();
+    Routes.configureRoutes(Application.router);
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
