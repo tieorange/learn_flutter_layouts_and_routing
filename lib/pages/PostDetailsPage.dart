@@ -14,21 +14,32 @@ class PostDetailsPage extends StatefulWidget {
 class _PostDetailsPageState extends State<PostDetailsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.post.title}'),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(32.0),
-        child: Row(
-          children: <Widget>[
-            Image.network(getPicture()),
-            FloatingActionButton.extended(
-                label: Text('back'), onPressed: onBackPressed)
-          ],
+    return Scaffold(body: Text("hello"));
+  }
+
+  List<Widget> buildHeader(BuildContext context, bool innerBoxIsScrolled) {
+    return <Widget>[
+      SliverAppBar(
+        expandedHeight: 200,
+        floating: false,
+        pinned: true,
+        flexibleSpace: FlexibleSpaceBar(
+          title: Text("Title very long title about dogs in Warsaw. Cute dogs"),
+//          background: buildImage(),
         ),
-      ),
+      )
+    ];
+  }
+
+  buildBody() {
+    return Row(
+      children: <Widget>[Text("Some information")],
     );
+  }
+
+  FloatingActionButton buildFloatingActionButton() {
+    return FloatingActionButton.extended(
+        label: Text('back'), onPressed: onBackPressed);
   }
 
   void onBackPressed() {

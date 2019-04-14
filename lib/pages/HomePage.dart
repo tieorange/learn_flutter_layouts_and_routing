@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter_layouts2/Post.dart';
 import 'package:learn_flutter_layouts2/main.dart';
+import 'package:learn_flutter_layouts2/pages/PostDetailsPage.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -11,6 +13,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Pets")),
+      backgroundColor: Colors.blueGrey,
+      body: Container(
+        child: buildList(),
+      ),
+    );
+  }
+
   buildList() {
     var src = "http://coape.pl/files/image/petsitter_photo2017_2.jpg";
     return ListView.builder(
@@ -36,10 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 6,
           child: Column(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(child: Image.network(src)),
-              ),
+              buildItemImage(src),
               Text("domowy hotel dla psow warszawa lore ispus dla psow swiezy",
                   textAlign: TextAlign.center),
               Row(
@@ -49,6 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Padding buildItemImage(String src) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Hero(tag: 'postPicture', child: Image.network(src)),
     );
   }
 
@@ -70,21 +87,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Pets")),
-      backgroundColor: Colors.blueGrey,
-      body: Container(
-        child: buildList(),
-      ),
-    );
-  }
-
   onClickItem(int index) {
     Application.router.navigateTo(context, "post/someId");
+/*
+    final pictures =
+        List.of(["http://coape.pl/files/image/petsitter_photo2017_2.jpg"]);
+    final post = new Post("title", pictures);
 
-//    Navigator.of(context)
-//        .push(MaterialPageRoute(builder: (context) => PostDetailsPage()));
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => PostDetailsPage(
+              post: post,
+            )));*/
   }
 }

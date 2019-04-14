@@ -15,8 +15,7 @@ class Routes {
     });
     router.define(root, handler: rootHandler);
 
-    router.define(postDetails,
-        handler: postDetailsHandler, transitionType: TransitionType.native);
+    router.define(postDetails, handler: postDetailsHandler);
   }
 }
 
@@ -28,7 +27,8 @@ var rootHandler =
 final postDetailsHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   final List<String> postId = params["postId"];
-  final pictures = List.of(["img"]);
+  final pictures =
+      List.of(["http://coape.pl/files/image/petsitter_photo2017_2.jpg"]);
   final post = new Post(postId.first, pictures);
   return new PostDetailsPage(post: post);
 });
