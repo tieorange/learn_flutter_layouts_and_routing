@@ -1,12 +1,14 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_layouts2/Post.dart';
+import 'package:learn_flutter_layouts2/pages/CreatePostPage.dart';
 import 'package:learn_flutter_layouts2/pages/HomePage.dart';
 import 'package:learn_flutter_layouts2/pages/PostDetailsPage.dart';
 
 class Routes {
   static String root = "/";
   static String postDetails = "/post/:postId";
+  static String createPost = "/createPost/";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -15,7 +17,9 @@ class Routes {
     });
     router.define(root, handler: rootHandler);
 
-    router.define(postDetails, handler: postDetailsHandler);
+    router.define(postDetails,
+        handler: postDetailsHandler, transitionType: TransitionType.fadeIn);
+    router.define(createPost, handler: createPostHandler);
   }
 }
 
@@ -23,6 +27,9 @@ var rootHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
   return new MyHomePage();
 });
+
+final createPostHandler =
+    Handler(handlerFunc: (_, Map<String, dynamic> params) => CreatePostPage());
 
 final postDetailsHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {

@@ -14,7 +14,12 @@ class PostDetailsPage extends StatefulWidget {
 class _PostDetailsPageState extends State<PostDetailsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("hello"));
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: buildHeader,
+        body: buildBody(),
+      ),
+    );
   }
 
   List<Widget> buildHeader(BuildContext context, bool innerBoxIsScrolled) {
@@ -25,11 +30,19 @@ class _PostDetailsPageState extends State<PostDetailsPage> {
         pinned: true,
         flexibleSpace: FlexibleSpaceBar(
           title: Text("Title very long title about dogs in Warsaw. Cute dogs"),
-//          background: buildImage(),
+          background: buildImage(),
         ),
       )
     ];
   }
+
+  buildImage() => Hero(
+        tag: 'postPicture',
+        child: Image.network(
+          getPicture(),
+          fit: BoxFit.cover,
+        ),
+      );
 
   buildBody() {
     return Row(
