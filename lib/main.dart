@@ -1,4 +1,5 @@
 import 'package:fluro/fluro.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_flutter_layouts2/Routes.dart';
 import 'package:learn_flutter_layouts2/pages/HomePage.dart';
@@ -9,7 +10,10 @@ class Application {
 }
 //endregion
 
-void main() => runApp(MyApp());
+void main() {
+  debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   MyApp() {
